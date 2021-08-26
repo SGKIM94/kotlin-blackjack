@@ -61,6 +61,10 @@ abstract class Participant(val name: String, cards: PlayerCards, var bettingMone
         return cards.isSameScore(player.cards)
     }
 
+    fun looseBettingMoney() {
+        bettingMoney = 0
+    }
+
     companion object {
         const val BLACKJACK_RECEIVE_MONEY_TIMES = 1.5
     }

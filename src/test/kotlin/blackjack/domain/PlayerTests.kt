@@ -111,4 +111,13 @@ class PlayerTests {
         assertThat(state).isEqualTo(States.BLACK_JACK)
         assertThat(player.bettingMoney).isEqualTo(expectedWinningMoney)
     }
+
+    @Test
+    fun 플레이어의_베팅금액을_0원으로_만든다() {
+        val player = Player(TEST_NAME, 1000, Card(CardSuite.HEART, CardNumber.ACE), Card(CardSuite.SPADE, CardNumber.JACK))
+
+        player.looseBettingMoney()
+
+        assertThat(player.bettingMoney).isEqualTo(0)
+    }
 }
