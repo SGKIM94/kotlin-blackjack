@@ -101,4 +101,14 @@ class PlayerTests {
 
         assertThat(game.state).isEqualTo(States.WIN)
     }
+
+    @ParameterizedTest
+    @CsvSource("1000, 1500", "0, 0", "2000, 3000")
+    fun `처음 받은 2개의 카드가 블랙잭인 경우 베팅 금액의 1점5배를 딜러에게 받는다`(bettingMoney: Int, expectedWinningMoney: Int) {
+        val player = Player(TEST_NAME, bettingMoney, Card(CardSuite.HEART, CardNumber.ACE), Card(CardSuite.SPADE, CardNumber.JACK))
+        val state = player.state
+
+        assertThat(state).isEqualTo(States.BLACK_JACK)
+        assertThat(player.bettingMoney).isEqualTo(expectedWinningMoney)
+    }
 }
