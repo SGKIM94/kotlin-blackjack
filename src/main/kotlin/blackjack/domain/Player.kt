@@ -4,6 +4,8 @@ class Player : Participant {
 
     constructor(name: String, cards: Set<Card>) : super(name, PlayerCards(cards))
     constructor(name: String, vararg cards: Card) : this(name, PlayerCards(cards.toSet()))
+    constructor(name: String, bettingMoney: Int, vararg cards: Card) : this(name, PlayerCards(cards.toSet()), bettingMoney)
+    constructor(name: String, cards: Set<Card>, bettingMoney: Int) : super(name, PlayerCards(cards.toSet()), bettingMoney)
 
     override fun findStateByScore(score: Int): States {
         return when {
@@ -14,8 +16,13 @@ class Player : Participant {
     }
 
     companion object {
-        fun generatePlayers(names: Names, cards: GameCards): Participants {
-            return Participants(names.map { Player(it, cards.pollCardsToFirstDraw()) }.toSet())
+        fun generatePlayers(names: Names, cards: GameCards, bettingMoneys: List<Int>): Participants {
+            val sizeOfPlayers = bettingMoneys.size
+            return Participants(
+                (0 until sizeOfPlayers).map {
+                    Player(names[it], cards.pollCardsToFirstDraw(), bettingMoneys[it])
+                }.toSet()
+            )
         }
     }
 }
