@@ -40,6 +40,14 @@ class Game(val participants: Participants, val dealer: Dealer, private val cards
             drawOrStopByAnswer(participant, answer)
 
             ResultView.printPlayerCards(participant.name, participant.cards)
+
+            looseMoneyWhenBust(participant)
+        }
+    }
+
+    private fun looseMoneyWhenBust(participant: Participant) {
+        if (participant.state === States.BUST) {
+            participant.looseBettingMoney()
         }
     }
 

@@ -51,4 +51,24 @@ class GameTest {
             game.draw(firstPlayer)
         }
     }
+
+    @Test
+    fun `카드를 추가로 뽑아 21을 초과할 경우 배팅 금액을 모두 잃게 된다`() {
+        val playerCards = PlayerCards(
+                setOf(
+                        Card(CardSuite.CLOVER, CardNumber.JACK),
+                        Card(CardSuite.HEART, CardNumber.JACK)
+                )
+        )
+
+        val player = Player(TEST_NAME, playerCards)
+
+        val game = Game(Participants(setOf(player)), Dealer(playerCards))
+        val firstPlayer = game.participants.first()
+
+        game.draw(firstPlayer)
+
+        assertThat(firstPlayer.bettingMoney).isEqualTo(0)
+    }
+
 }
