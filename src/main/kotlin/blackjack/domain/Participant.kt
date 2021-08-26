@@ -2,7 +2,9 @@ package blackjack.domain
 
 import kotlin.math.abs
 
-abstract class Participant(val name: String, cards: PlayerCards) {
+abstract class Participant(val name: String, cards: PlayerCards, var bettingMoney: Int) {
+
+    constructor(name: String, cards: PlayerCards) : this(name, PlayerCards(cards.toSet()), 0)
 
     var cards: PlayerCards = cards
         private set
@@ -25,6 +27,7 @@ abstract class Participant(val name: String, cards: PlayerCards) {
     init {
         if (cards.score == Game.BLACK_JACK_SCORE) {
             state = States.BLACK_JACK
+            bettingMoney = (bettingMoney * BLACKJACK_RECEIVE_MONEY_TIMES).toInt()
         }
     }
 
@@ -56,5 +59,9 @@ abstract class Participant(val name: String, cards: PlayerCards) {
 
     fun isSameScore(player: Participant): Boolean {
         return cards.isSameScore(player.cards)
+    }
+
+    companion object {
+        const val BLACKJACK_RECEIVE_MONEY_TIMES = 1.5
     }
 }
