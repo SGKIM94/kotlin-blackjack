@@ -1,10 +1,6 @@
 package blackjack.controller
 
-import blackjack.domain.Dealer
-import blackjack.domain.Game
-import blackjack.domain.GameCards
-import blackjack.domain.Names
-import blackjack.domain.Player
+import blackjack.domain.*
 import blackjack.view.InputView
 import blackjack.view.ResultView
 
@@ -13,7 +9,9 @@ fun main() {
 
     val gameCards = GameCards()
 
-    val players = Player.generatePlayers(names, gameCards)
+    val bettingMoneys = names.map{ InputView.bettingMoney(it) }
+
+    val players = Player.generatePlayers(names, gameCards, bettingMoneys)
     val dealer = Dealer.generateDealer(gameCards)
 
     val game = Game(players, dealer, gameCards)
