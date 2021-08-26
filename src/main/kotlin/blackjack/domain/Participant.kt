@@ -62,10 +62,11 @@ abstract class Participant(val name: String, cards: PlayerCards, var bettingMone
     }
 
     fun looseBettingMoney() {
-        bettingMoney = 0
+        bettingMoney = INITIALIZE_MONEY
     }
 
     companion object {
         const val BLACKJACK_RECEIVE_MONEY_TIMES = 1.5
+        const val INITIALIZE_MONEY = 0
     }
 }
