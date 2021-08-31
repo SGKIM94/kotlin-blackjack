@@ -125,8 +125,18 @@ class PlayerTests {
     fun `처음 카드가 블랙잭인 경우 베팅금액의 1점5배를 수익금에 더한다`() {
         val player = Player(TEST_NAME, 1000, Card(CardSuite.HEART, CardNumber.ACE), Card(CardSuite.SPADE, CardNumber.JACK))
 
-        player.addProfitByBlackjack()
+        val moneyOfBlackjack = player.addProfitByBlackjack()
 
         assertThat(player.profit).isEqualTo(1500)
+        assertThat(moneyOfBlackjack).isEqualTo(1500)
+    }
+
+    @Test
+    fun `딜러와 플레이어 둘 다 블랙잭인 경우 플레이어는 배팅금액을 돌려받는다`() {
+        val player = Player(TEST_NAME, 1000, Card(CardSuite.HEART, CardNumber.ACE), Card(CardSuite.SPADE, CardNumber.JACK))
+
+        player.addProfitByBlackjackWithDealer()
+
+        assertThat(player.profit).isEqualTo(1000)
     }
 }

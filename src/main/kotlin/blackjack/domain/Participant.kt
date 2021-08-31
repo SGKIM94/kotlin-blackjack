@@ -2,9 +2,9 @@ package blackjack.domain
 
 import kotlin.math.abs
 
-abstract class Participant(val name: String, cards: PlayerCards, var bettingMoney: Int) {
+abstract class Participant(val name: String, cards: PlayerCards, var bettingMoney: Int, var profit: Int) {
 
-    constructor(name: String, cards: PlayerCards) : this(name, PlayerCards(cards.toSet()), 0)
+    constructor(name: String, cards: PlayerCards) : this(name, PlayerCards(cards.toSet()), 0, 0)
 
     var cards: PlayerCards = cards
         private set
@@ -27,11 +27,20 @@ abstract class Participant(val name: String, cards: PlayerCards, var bettingMone
     init {
         if (cards.score == Game.BLACK_JACK_SCORE) {
             state = States.BLACK_JACK
-            bettingMoney = (bettingMoney * BLACKJACK_RECEIVE_MONEY_TIMES).toInt()
         }
     }
 
     abstract fun findStateByScore(score: Int): States
+
+    abstract fun isDealer(): Boolean
+
+    fun addProfitByBlackjack(): Int {
+        val moneyOfBlackjack = (bettingMoney * 1.5).toInt()
+
+        profit += moneyOfBlackjack
+
+        return moneyOfBlackjack
+    }
 
     fun draw(card: Card) {
         throwExceptionIfIsNotPlayingState()
@@ -63,6 +72,10 @@ abstract class Participant(val name: String, cards: PlayerCards, var bettingMone
 
     fun looseBettingMoney() {
         bettingMoney = INITIALIZE_MONEY
+    }
+
+    fun addProfitByBlackjackWithDealer() {
+        profit += bettingMoney
     }
 
     companion object {
