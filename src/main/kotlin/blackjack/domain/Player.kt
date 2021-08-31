@@ -5,7 +5,7 @@ class Player : Participant {
     constructor(name: String, cards: Set<Card>) : super(name, PlayerCards(cards))
     constructor(name: String, vararg cards: Card) : this(name, PlayerCards(cards.toSet()))
     constructor(name: String, bettingMoney: Int, vararg cards: Card) : this(name, PlayerCards(cards.toSet()), bettingMoney)
-    constructor(name: String, cards: Set<Card>, bettingMoney: Int) : super(name, PlayerCards(cards.toSet()), bettingMoney)
+    constructor(name: String, cards: Set<Card>, bettingMoney: Int) : super(name, PlayerCards(cards.toSet()), bettingMoney, 0)
 
     override fun findStateByScore(score: Int): States {
         return when {
@@ -13,6 +13,10 @@ class Player : Participant {
             score > Game.BLACK_JACK_SCORE -> States.BUST
             else -> States.STAY
         }
+    }
+
+    override fun isDealer(): Boolean {
+        return false
     }
 
     companion object {
