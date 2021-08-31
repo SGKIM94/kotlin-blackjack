@@ -5,6 +5,35 @@ import blackjack.view.ResultView
 
 class Game(val participants: Participants, val dealer: Dealer, private val cards: GameCards = GameCards()) {
 
+    init {
+        addProfitWhenHaveBlackjack()
+    }
+
+    private fun addProfitWhenHaveBlackjack() {
+        val blackjacks = participants.filter { it.state === States.BLACK_JACK }
+
+        if (blackjacks.isEmpty()) {
+            return
+        }
+
+        if (blackjacks.isNotEmpty() && dealer.state !== States.BLACK_JACK) {
+            addProfitsByBlackjack(blackjacks)
+            val sumOfBlackjacksMoney = calculateProfitsByBlackjack(blackjacks)
+
+            dealer.cutProfitByBlackjacks(sumOfBlackjacksMoney)
+            return
+        }
+
+        blackjacks.forEach { it.addProfitByBlackjackWithDealer() }
+    }
+
+    private fun calculateProfitsByBlackjack(blackjacks: List<Participant>) =
+            blackjacks.map { it.calculateProfitByBlackjack() }.sum()
+
+    private fun addProfitsByBlackjack(blackjacks: List<Participant>) {
+        blackjacks.map { it.addProfitByBlackjack() }
+    }
+
     fun draw(participant: Participant) {
         participant.throwExceptionIfIsNotPlayingState()
 
