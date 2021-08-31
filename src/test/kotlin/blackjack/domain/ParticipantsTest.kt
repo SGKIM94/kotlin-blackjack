@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test
 class ParticipantsTest {
 
     @Test
-    fun 점수륿_비교하여_우승자를_찾는다() {
+    fun `점수륿_비교하여_우승자를_찾는다`() {
         val firstPlayer = Player(TEST_NAME, Card(CardSuite.HEART, CardNumber.ACE), Card(CardSuite.SPADE, CardNumber.JACK))
         val secondPlayer = Player(TEST_SECOND_NAME, Card(CardSuite.DIAMOND, CardNumber.TEN), Card(CardSuite.SPADE, CardNumber.FOUR))
 
@@ -20,7 +20,7 @@ class ParticipantsTest {
     }
 
     @Test
-    fun 우승_점수를_가지는경우_우승자로_만든다() {
+    fun `우승_점수를_가지는경우_우승자로_만든다`() {
         val firstPlayer = Player(TEST_NAME, Card(CardSuite.HEART, CardNumber.ACE), Card(CardSuite.SPADE, CardNumber.JACK))
         val secondPlayer = Player(TEST_SECOND_NAME, Card(CardSuite.DIAMOND, CardNumber.TEN), Card(CardSuite.SPADE, CardNumber.FOUR))
 
