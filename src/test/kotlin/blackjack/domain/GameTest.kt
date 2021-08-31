@@ -70,5 +70,4 @@ class GameTest {
 
         assertThat(firstPlayer.bettingMoney).isEqualTo(0)
     }
-
 }
