@@ -56,4 +56,16 @@ class ParticipantsTest {
         assertThat(allProfit).isEqualTo(4500)
     }
 
+    @Test
+    fun `플레이어들과 딜러의 첫 카드가 블랙잭인 경우 배팅한 금액을 수익에 더한다`() {
+        val firstPlayer = Player(TEST_NAME, 2000, Card(CardSuite.HEART, CardNumber.ACE), Card(CardSuite.SPADE, CardNumber.JACK))
+        val secondPlayer = Player(TEST_SECOND_NAME, 1000, Card(CardSuite.DIAMOND, CardNumber.ACE), Card(CardSuite.SPADE, CardNumber.TEN))
+
+        val participants = Participants(setOf(firstPlayer, secondPlayer))
+
+        participants.addProfitsByBlackjackWithDealer()
+
+        assertThat(firstPlayer.profit).isEqualTo(2000)
+        assertThat(secondPlayer.profit).isEqualTo(1000)
+    }
 }

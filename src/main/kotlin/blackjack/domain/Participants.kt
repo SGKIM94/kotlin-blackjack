@@ -15,4 +15,8 @@ class Participants(private val participants: Set<Participant>) : Set<Participant
     fun addProfitsByBlackjack() {
         participants.map { it.addProfitByBlackjack() }
     }
+
+    fun addProfitsByBlackjackWithDealer() {
+        participants.forEach { it.addProfitByBlackjackWithDealer() }
+    }
 }
