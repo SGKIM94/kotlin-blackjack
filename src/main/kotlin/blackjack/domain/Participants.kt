@@ -9,4 +9,10 @@ class Participants(private val participants: Set<Participant>) : Set<Participant
     fun makeWinners(winner: Participant) {
         participants.filter { it.isSameScore(winner) }.forEach { it.win() }
     }
+
+    fun calculateProfitsByBlackjack() = participants.map { it.calculateProfitByBlackjack() }.sum()
+
+    fun addProfitsByBlackjack() {
+        participants.map { it.addProfitByBlackjack() }
+    }
 }
