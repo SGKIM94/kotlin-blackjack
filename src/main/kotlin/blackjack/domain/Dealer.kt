@@ -13,12 +13,20 @@ class Dealer(cards: PlayerCards) : Participant(DEALER_NAME, cards) {
         }
     }
 
+    override fun isDealer(): Boolean {
+        return true
+    }
+
     fun isSmallerThanMinimumScore(): Boolean {
         return cards.score <= MINIMUM_DEALER_FIRST_SCORE
     }
 
     fun isWinScore(): Boolean {
         return cards.score > Game.BLACK_JACK_SCORE
+    }
+
+    fun cutProfitByBlackjacks(sumOfBlackjacksMoney: Int) {
+        profit -= sumOfBlackjacksMoney
     }
 
     companion object {
