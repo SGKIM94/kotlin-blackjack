@@ -34,12 +34,12 @@ abstract class Participant(val name: String, cards: PlayerCards, var bettingMone
 
     abstract fun isDealer(): Boolean
 
-    fun addProfitByBlackjack(): Int {
-        val moneyOfBlackjack = (bettingMoney * 1.5).toInt()
+    fun addProfitByBlackjack() {
+        profit += (bettingMoney * 1.5).toInt()
+    }
 
-        profit += moneyOfBlackjack
-
-        return moneyOfBlackjack
+    fun calculateProfitByBlackjack(): Int {
+        return (bettingMoney * 1.5).toInt()
     }
 
     fun draw(card: Card) {
