@@ -68,4 +68,18 @@ class ParticipantsTest {
         assertThat(firstPlayer.profit).isEqualTo(2000)
         assertThat(secondPlayer.profit).isEqualTo(1000)
     }
+
+    @Test
+    fun `패배한 플레이어들은 베팅한 금액만큼 수익에서 차감시킨다`() {
+        val firstPlayer = Player(TEST_NAME, 2000, Card(CardSuite.HEART, CardNumber.ACE), Card(CardSuite.SPADE, CardNumber.JACK))
+        val secondPlayer = Player(TEST_SECOND_NAME, 1000, Card(CardSuite.DIAMOND, CardNumber.TWO), Card(CardSuite.SPADE, CardNumber.THREE))
+        val thirdPlayer = Player("테스터", 4000, Card(CardSuite.DIAMOND, CardNumber.FOUR), Card(CardSuite.SPADE, CardNumber.FIVE))
+
+        val participants = Participants(setOf(firstPlayer, secondPlayer, thirdPlayer))
+
+        participants.cutMoneyWithLosers(firstPlayer)
+
+        assertThat(secondPlayer.profit).isEqualTo(-1000)
+        assertThat(thirdPlayer.profit).isEqualTo(-4000)
+    }
 }

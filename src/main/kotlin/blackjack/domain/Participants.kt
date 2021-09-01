@@ -19,4 +19,8 @@ class Participants(private val participants: Set<Participant>) : Set<Participant
     fun addProfitsByBlackjackWithDealer() {
         participants.forEach { it.addProfitByBlackjackWithDealer() }
     }
+
+    fun cutMoneyWithLosers(winner: Participant) {
+        participants.filter { it != winner }.forEach { it.cutMoneyWhenLoser() }
+    }
 }
