@@ -75,7 +75,19 @@ abstract class Participant(val name: String, cards: PlayerCards, var bettingMone
     }
 
     fun addProfitByBlackjackWithDealer() {
+        addProfitByBettingMoney()
+    }
+
+    fun addWinnerMoney() {
+        addProfitByBettingMoney()
+    }
+
+    private fun addProfitByBettingMoney() {
         profit += bettingMoney
+    }
+
+    fun cutMoneyWhenLoser() {
+        profit -= bettingMoney
     }
 
     companion object {
