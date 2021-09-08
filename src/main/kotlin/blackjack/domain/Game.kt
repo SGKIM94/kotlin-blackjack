@@ -42,12 +42,22 @@ class Game(val participants: Participants, val dealer: Dealer, private val cards
 
         val winner = participants.findWinnerScore()
         participants.makeWinners(winner)
+
+        winner.addWinnerMoney()
+        participants.cutMoneyWithLosers(winner)
     }
 
     fun playGameWithParticipants() {
         playGames()
 
         drawIfSmallerThanMinimum()
+        addProfitByBettingMoneyWhenDealerBust()
+    }
+
+    private fun addProfitByBettingMoneyWhenDealerBust() {
+        if (dealer.state === States.BUST) {
+            participants.forEach { it.profit += it.bettingMoney }
+        }
     }
 
     private fun playGames() {
