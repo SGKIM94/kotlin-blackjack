@@ -1,6 +1,7 @@
 package blackjack.view
 
 import blackjack.domain.*
+import blackjack.domain.Dealer.Companion.DEALER_NAME
 import blackjack.view.CardDisplayNumber.displayName
 import blackjack.view.CardSuiteName.koreaName
 
@@ -21,7 +22,7 @@ object ResultView {
     }
 
     fun printDealerProfit(dealer: Dealer) {
-        println("딜러: ${dealer.profit}")
+        println("$DEALER_NAME: ${dealer.profit}")
     }
 
     fun printAllPlayerCards(game: Game) {
