@@ -29,4 +29,10 @@ fun main() {
     game.assignWinner()
 
     ResultView.printGameResults(dealer, game)
+
+    println("딜러: ${dealer.profit}")
+
+    game.participants.forEach {
+        println("${it.name} : ${it.profit}")
+    }
 }
