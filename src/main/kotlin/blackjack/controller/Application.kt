@@ -30,9 +30,7 @@ fun main() {
 
     ResultView.printGameResults(dealer, game)
 
-    println("딜러: ${dealer.profit}")
+    ResultView.printDealerProfit(dealer)
 
-    game.participants.forEach {
-        println("${it.name} : ${it.profit}")
-    }
+    ResultView.printAllPlayerProfit(game)
 }

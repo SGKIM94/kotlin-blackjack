@@ -1,10 +1,6 @@
 package blackjack.view
 
-import blackjack.domain.Card
-import blackjack.domain.Game
-import blackjack.domain.Dealer
-import blackjack.domain.Participant
-import blackjack.domain.PlayerCards
+import blackjack.domain.*
 import blackjack.view.CardDisplayNumber.displayName
 import blackjack.view.CardSuiteName.koreaName
 
@@ -13,6 +9,20 @@ object ResultView {
 
     private val Card.fullName: String
         get() = number.displayName + suite.koreaName
+
+    fun printAllPlayerProfit(game: Game) {
+        game.participants.forEach {
+            printPlayerProfit(it)
+        }
+    }
+
+    private fun printPlayerProfit(it: Participant) {
+        println("${it.name} : ${it.profit}")
+    }
+
+    fun printDealerProfit(dealer: Dealer) {
+        println("딜러: ${dealer.profit}")
+    }
 
     fun printAllPlayerCards(game: Game) {
         game.participants.forEach {
